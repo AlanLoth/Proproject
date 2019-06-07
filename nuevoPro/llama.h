@@ -17,7 +17,7 @@ public:
     int haceProfe(QString,QString,QString,QString);
     int haceAlumno(QString,QString,QString,QString);
     int inic(QString,QString);
-    void pmat(QString,QString);
+    int pmat(QString,QString);
     void conecta();
 };
 
