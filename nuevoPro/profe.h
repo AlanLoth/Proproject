@@ -1,22 +1,15 @@
-#ifndef PROFE_H
-#define PROFE_H
+#include "profe.h"
+#include "ui_profe.h"
 
-#include <QDialog>
-
-namespace Ui {
-class profe;
+profe::profe(QString matricula, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::profe)
+{
+    ui->setupUi(this);
+    matr=matricula;
 }
 
-class profe : public QDialog
+profe::~profe()
 {
-    Q_OBJECT
-
-public:
-    explicit profe(QWidget *parent = nullptr);
-    ~profe();
-
-private:
-    Ui::profe *ui;
-};
-
-#endif // PROFE_H
+    delete ui;
+}
