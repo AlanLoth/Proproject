@@ -11,15 +11,14 @@
 
 class llama
 {
-
 public:
     llama(){}
     ~llama(){}
-    void haceProfe(QString,QString,QString,QString);
-    void haceAlumno(QString,QString,QString,QString);
-    void inic(QString,QString);
+    int haceProfe(QString,QString,QString,QString);
+    int haceAlumno(QString,QString,QString,QString);
+    int inic(QString,QString);
+    void pmat(QString,QString);
     void conecta();
 };
 
 #endif // LLAMA_H
-
