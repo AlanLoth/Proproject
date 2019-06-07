@@ -16,14 +16,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_ini_clicked()
 {
-    Inicia *inicia =new Inicia(this);
-    inicia->setModal(true);
+    close();
+    Inicia *inicia =new Inicia;
     inicia->setVisible(true);
 }
 
 void MainWindow::on_reg_clicked()
 {
-    Registra *reg =new Registra(this);
-    reg->setModal(true);
+    close();
+    Registra *reg =new Registra;
     reg->setVisible(true);
 }
