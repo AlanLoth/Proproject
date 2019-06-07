@@ -60,13 +60,16 @@ void llama::conecta(){
 
 }
 
-void llama::pmat(QString id,QString nom){
+int llama::pmat(QString id,QString nom){
+    int x=0;
     QSqlQuery mys;
     mys.exec("SELECT * FROM Materia WHERE Profe_idProfe='"+id+"' and Nombre='"+nom+"';");
-    if(mys.size()==0){
+    if(mys.size()!=0){
         int newid=mys.exec("SELECT MAX(idProfe) FROM Materia;");
         QString str=QString::fromStdString(std::to_string(newid+1));
         str="INSERT INTO Materia VALUES('"+str+"','"+nom+"','"+id+"');";
         mys.exec(str);
+        x=1;
     }
+    return x;
 }
