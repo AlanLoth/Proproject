@@ -1,46 +1,48 @@
 #include "llama.h"
 
-void llama::haceProfe(QString nom,QString ape,QString pasw,QString matr){
+int llama::haceProfe(QString nom,QString ape,QString pasw,QString matr){
     QSqlQuery mys;
+    int x=0;
     mys.exec("SELECT * FROM Profe WHERE Matricula='"+matr+"';");
     if(mys.size()==0){
         int newid=mys.exec("SELECT MAX(idProfe) FROM Profe;");
         QString str=QString::fromStdString(std::to_string(newid+1));
         str="INSERT INTO Profe VALUES('"+str+"','"+nom+"','"+ape+"','"+matr+"','"+pasw+"');";
         mys.exec(str);
-        profe *prof =new profe;
-        prof->setVisible(true);
+        x=1;
     }
+    return x;
 }
 
-void llama::haceAlumno(QString nom,QString ape,QString pasw,QString matr){
+int llama::haceAlumno(QString nom,QString ape,QString pasw,QString matr){
     QSqlQuery mys;
+    int x=0;
     mys.exec("SELECT * FROM Alumno WHERE Matricula='"+matr+"';");
     if(mys.size()==0){
         int newid=mys.exec("SELECT MAX(idAlumno) FROM Alumno");
         QString str=QString::fromStdString(std::to_string(newid+1));
         str="INSERT INTO Alumno VALUES('"+str+"','"+nom+"','"+ape+"','"+matr+"','"+pasw+"');";
         mys.exec(str);
-        alumno *alum =new alumno;
-        alum->setVisible(true);
+        x=1;
     }
+    return x;
 }
 
-void llama::inic(QString matr,QString pasw){
+int llama::inic(QString matr,QString pasw){
+    int x=0;
     QSqlQuery mys;
     if(matr[0]=="0"){
         mys.exec("SELECT * FROM Profe WHERE Matricula='"+matr+"' and Pasw='"+pasw+"';");
         if(mys.size()!=0){
-            profe *prof =new profe;
-            prof->setVisible(true);
+            x=1;
         }
     } else {
         mys.exec("SELECT * FROM Alumno WHERE Matricula='"+matr+"' and Pasw='"+pasw+"';");
         if(mys.size()!=0){
-            alumno *alum =new alumno;
-            alum->setVisible(true);
+            x=2;
         }
     }
+    return x;
 }
 
 void llama::conecta(){
@@ -56,4 +58,15 @@ void llama::conecta(){
         std::cout<<"no"<<std::endl;
     }
 
+}
+
+void llama::pmat(QString id,QString nom){
+    QSqlQuery mys;
+    mys.exec("SELECT * FROM Materia WHERE Profe_idProfe='"+id+"' and Nombre='"+nom+"';");
+    if(mys.size()==0){
+        int newid=mys.exec("SELECT MAX(idProfe) FROM Materia;");
+        QString str=QString::fromStdString(std::to_string(newid+1));
+        str="INSERT INTO Materia VALUES('"+str+"','"+nom+"','"+id+"');";
+        mys.exec(str);
+    }
 }
